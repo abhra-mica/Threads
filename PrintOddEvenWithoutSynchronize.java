@@ -4,9 +4,8 @@ public class PrintOddEvenWithoutSynchronize {
 	public static volatile int count;
 
 	public static void main(String[] args) throws InterruptedException {
-		Thread oddThread = new Thread(new OddInterruptThread(), "Odd Thread ");
-		Thread evenThread = new Thread(new EvenInterruptThread(),
-				"Even Thread ");
+		Thread oddThread = new Thread(new OddThreadUnSync(), "Odd Thread ");
+		Thread evenThread = new Thread(new EvenThreadUnSync(), "Even Thread ");
 
 		oddThread.start();
 		evenThread.start();
@@ -32,7 +31,7 @@ public class PrintOddEvenWithoutSynchronize {
 		}
 	}
 
-	static class OddInterruptThread implements Runnable {
+	static class OddThreadUnSync implements Runnable {
 		public void run() {
 			int oldNum = 0;
 			while (count != 20) {
@@ -45,7 +44,7 @@ public class PrintOddEvenWithoutSynchronize {
 		}
 	}
 
-	static class EvenInterruptThread implements Runnable {
+	static class EvenThreadUnSync implements Runnable {
 		public void run() {
 			int oldNum = 0;
 			do {
@@ -54,7 +53,7 @@ public class PrintOddEvenWithoutSynchronize {
 							+ " prints " + count);
 					oldNum = count;
 				}
-			}while (count != 20);
+			} while (count != 20);
 		}
 	}
 }
